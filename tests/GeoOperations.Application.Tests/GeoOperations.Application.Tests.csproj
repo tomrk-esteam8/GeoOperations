@@ -18,4 +18,8 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\GeoOperations.Application\GeoOperations.Application.csproj" />
+  </ItemGroup>
+
 </Project>
