@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/GeoOperations.Api/GeoOperations.Api.csproj" />
+    <Project Path="src/GeoOperations.Application/GeoOperations.Application.csproj" />
+    <Project Path="src/GeoOperations.Domain/GeoOperations.Domain.csproj" />
+    <Project Path="src/GeoOperations.Infrastructure/GeoOperations.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/GeoOperations.Application.Tests/GeoOperations.Application.Tests.csproj" />
+    <Project Path="tests/GeoOperations.Domain.Tests/GeoOperations.Domain.Tests.csproj" />
+  </Folder>
+</Solution>
