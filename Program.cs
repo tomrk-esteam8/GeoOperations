@@ -12,8 +12,10 @@ builder.Services.AddSingleton<IGeoDistanceCalculator, HaversineDistanceCalculato
 builder.Services.AddSingleton<IAssetRepository, InMemoryAssetRepository>();
 builder.Services.AddSingleton<IAssetService, AssetService>();
 
+builder.Services.AddSingleton<IZoneGeometryService, NetTopologyZoneGeometryService>();
 builder.Services.AddSingleton<IZoneRepository, InMemoryZoneRepository>();
 builder.Services.AddSingleton<IZoneService, ZoneService>();
+
 
 var app = builder.Build();
 

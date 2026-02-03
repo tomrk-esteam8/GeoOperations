@@ -1,29 +1,27 @@
 using GeoOperations.Application.Interfaces;
 using GeoOperations.Domain.Entities;
 using GeoOperations.Domain.ValueObjects;
-using GeoOperations.Infrastructure.Geometry;
 
 namespace GeoOperations.Application.Services;
 
 public sealed class ZoneService : IZoneService
 {
     private readonly IZoneRepository _repository;
+    private readonly IZoneGeometryService _geometryService;
 
-    public ZoneService(IZoneRepository repository)
+    public ZoneService(
+        IZoneRepository repository,
+        IZoneGeometryService geometryService)
     {
         _repository = repository;
+        _geometryService = geometryService;
     }
 
     public IReadOnlyCollection<Zone> FindContainingZones(GeoPoint point)
     {
-        var geometryPoint = GeometryFactoryAdapter.ToPoint(point);
-
         return _repository
             .GetAll()
-            .Where(zone =>
-                GeometryFactoryAdapter
-                    .ToPolygon(zone)
-                    .Contains(geometryPoint))
+            .Where(zone => _geometryService.Contains(zone, point))
             .ToList();
     }
 }

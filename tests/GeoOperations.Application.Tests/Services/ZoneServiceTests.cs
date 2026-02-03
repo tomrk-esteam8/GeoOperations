@@ -22,7 +22,9 @@ public class ZoneServiceTests
             });
 
         var repository = new FakeZoneRepository(zone);
-        var service = new ZoneService(repository);
+        var geometryService = new FakeZoneGeometryService();
+        var service = new ZoneService(repository, geometryService);
+
 
         var pointInside = new GeoPoint(15, 15);
 
