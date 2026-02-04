@@ -31,4 +31,29 @@ public class GeoPointTests
         Assert.Throws<ArgumentOutOfRangeException>(
             () => new GeoPoint(lat, lon));
     }
+
+    [Fact]
+    public void Should_Allow_Latitude_And_Longitude_On_Boundary()
+    {
+        var point = new GeoPoint(90, 180);
+
+        Assert.Equal(90, point.Latitude);
+        Assert.Equal(180, point.Longitude);
+    }
+
+    [Fact]
+    public void Should_Throw_When_Latitude_Is_NaN()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => new GeoPoint(double.NaN, 0));
+    }
+
+    [Fact]
+    public void Should_Throw_When_Longitude_Is_NaN()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => new GeoPoint(0, double.NaN));
+    }
+
+
 }

@@ -28,4 +28,18 @@ public class DistanceTests
         Assert.Throws<ArgumentOutOfRangeException>(
             () => Distance.FromMeters(-1));
     }
+
+    [Fact]
+    public void Zero_Distance_Should_Be_Valid()
+    {
+        var distance = Distance.FromMeters(0);
+
+        Assert.Equal(0, distance.Meters);
+    }
+
+    public void Should_Throw_When_Distance_Is_NaN()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => Distance.FromMeters(double.NaN));
+    }
 }

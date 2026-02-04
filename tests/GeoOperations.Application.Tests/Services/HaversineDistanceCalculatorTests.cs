@@ -33,4 +33,31 @@ public class HaversineDistanceCalculatorTests
             870,
             890);
     }
+
+    [Fact]
+    public void Distance_Should_Be_Symmetric()
+    {
+        var calculator = new HaversineDistanceCalculator();
+
+        var a = new GeoPoint(52.52, 13.405);
+        var b = new GeoPoint(48.8566, 2.3522);
+
+        var ab = calculator.Calculate(a, b).Meters;
+        var ba = calculator.Calculate(b, a).Meters;
+
+        Assert.InRange(Math.Abs(ab - ba), 0, 0.001);
+    }
+
+    [Fact]
+    public void Should_Handle_Very_Close_Points()
+    {
+        var calculator = new HaversineDistanceCalculator();
+
+        var a = new GeoPoint(52.5200, 13.4050);
+        var b = new GeoPoint(52.5201, 13.4051);
+
+        var distance = calculator.Calculate(a, b);
+
+        Assert.InRange(distance.Meters, 0, 50);
+    }
 }

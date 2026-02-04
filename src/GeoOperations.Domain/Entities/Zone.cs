@@ -10,8 +10,16 @@ public sealed class Zone
 
     public Zone(Guid id, string name, IReadOnlyCollection<GeoPoint> boundary)
     {
+        if (name is null)
+            throw new ArgumentNullException(nameof(name));
+
+        if (boundary is null)
+            throw new ArgumentNullException(nameof(boundary));
+
         if (boundary.Count < 3)
-            throw new ArgumentException("Zone must have at least 3 points.", nameof(boundary));
+            throw new ArgumentException(
+                "Zone must have at least 3 points.",
+                nameof(boundary));
 
         Id = id;
         Name = name ?? throw new ArgumentNullException(nameof(name));

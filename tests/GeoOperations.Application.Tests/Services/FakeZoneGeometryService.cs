@@ -6,9 +6,10 @@ namespace GeoOperations.Application.Tests.Services;
 
 internal sealed class FakeZoneGeometryService : IZoneGeometryService
 {
+    public bool ContainsResult { get; set; }
+
     public bool Contains(Zone zone, GeoPoint point)
     {
-        // Very simple fake: test decides behavior
-        return zone.Name == "Test Zone";
+        return ContainsResult;
     }
 }

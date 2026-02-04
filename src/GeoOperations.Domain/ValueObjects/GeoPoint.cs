@@ -7,6 +7,12 @@ public sealed record GeoPoint
 
     public GeoPoint(double latitude, double longitude)
     {
+        if (double.IsNaN(latitude) || double.IsInfinity(latitude))
+            throw new ArgumentOutOfRangeException(nameof(latitude));
+
+        if (double.IsNaN(longitude) || double.IsInfinity(longitude))
+            throw new ArgumentOutOfRangeException(nameof(longitude));
+            
         if (latitude < -90 || latitude > 90)
             throw new ArgumentOutOfRangeException(
                 nameof(latitude),

@@ -5,6 +5,10 @@ using NetTopologySuite.Geometries;
 
 namespace GeoOperations.Infrastructure.Geometry;
 
+// IMPORTANT:
+// NetTopologySuite expects coordinates as (longitude, latitude)
+// SRID 4326 = WGS84 (standard GPS coordinates)
+
 public sealed class NetTopologyZoneGeometryService : IZoneGeometryService
 {
     private static readonly GeometryFactory Factory =
@@ -16,7 +20,8 @@ public sealed class NetTopologyZoneGeometryService : IZoneGeometryService
         var polygon = ToPolygon(zone);
         var geometryPoint = ToPoint(point);
 
-        return polygon.Contains(geometryPoint);
+        return polygon.Contains(geometryPoint) 
+            || polygon.Touches(geometryPoint);
     }
 
     private static Point ToPoint(GeoPoint geoPoint)

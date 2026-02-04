@@ -8,6 +8,9 @@ public sealed record Distance
 
     private Distance(double meters)
     {
+        if (double.IsNaN(meters) || double.IsInfinity(meters))
+            throw new ArgumentOutOfRangeException(nameof(meters));
+            
         if (meters < 0)
             throw new ArgumentOutOfRangeException(
                 nameof(meters),
